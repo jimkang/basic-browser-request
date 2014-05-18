@@ -1,52 +1,46 @@
-yet-another-module
-==================
+basic-browser-request
+=====================
 
-This module is for something or other. For example:
-
-    code and what not
-
-Etc.!
+Another lightweight wrapper around XHR that &mdash; according to me &mdash; does just enough. Supports chunking, canceling, and JSON.
 
 Installation
 ------------
 
-    npm install yet-another-module
+    npm install basic-browser-request
 
 Usage
 -----
 
-Load the module somehow.
+    var requestHandle = requestMaker.makeRequest({
+      url: 'http://something.whatever/yeah',
+      method: 'GET',
+      mimeType: 'text/plain',
+      onData: function onData(data) {
+        console.log(data);
+        chunksReceived += 1;
+      },
+      done: function onDone(error, text) {
+        if (error) {
+          console.log(error);
+        }
+        else {
+          useCompleteDownloadedText(text);
+        }
+      }
+    });
 
-    var someFactory = require('yet-another-module');
+To cancel:
 
-Create a thing from the module.
+    requestHandle.cancelRequest();
 
-    var thing = someFactory();
+If you don't specify a mimeType, it defaults to `application/json` and `done()` will be passed a parsed JSON object.
 
-Use that thing.
-
-    thing.use();
-
-Success!
-
-__In the browser__
-
-    make browserify
-
-Then:
-
-    make minbrowserify
-
-After that, include `<script src="yetanothermodule-browserified.min.js">` in your html file. Then, in your JavaScript file:
-
-    var thing = exportname.createThing();
-
-[Here's a working example.](http://jimkang.com/yet-another-module/example)
+[Here's a working example.](http://jimkang.com/basic-browser-request/example)
 
 Tests
 -----
 
-Run tests with `npm test`. Run tests in the debugger with 'npm run-script dtest'.
+TODO.
 
 License
 -------
