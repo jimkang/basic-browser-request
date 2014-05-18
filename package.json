@@ -1,0 +1,30 @@
+{
+  "name": "basic-browser-request",
+  "version": "0.1.0",
+  "description": "Yet another XHR abstraction. Supports canceling, JSON, and crude chunking.",
+  "main": "basicrequest.js",
+  "scripts": {
+    "test": "python -m SimpleHTTPServer # Now, open http://localhost:8000/example/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jimkang/basic-browser-request.git"
+  },
+  "keywords": [
+    "module",
+    "xhr",
+    "http",
+    "request",
+    "cancel",
+    "browser",
+    "chunking"
+  ],
+  "author": "Jim Kang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jimkang/basic-browser-request/issues"
+  },
+  "homepage": "https://github.com/jimkang/basic-browser-request",
+  "devDependencies": {},
+  "dependencies": {}
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<html>
+<head>
+  <title>basic-browser-request example</title>
+  <link rel="stylesheet" type="text/css" href="example.css" />
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'med0yzx',
+        scriptTimeout: 3000
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+</head>
+
+<body>
+
+<h2>An example of <a href="https://github.com/jimkang/basic-browser-request">basic-browser-request</a></h2>
+
+<p class="explanation">
+  Hit "Start" to start a request for a file.
+</p>
+
+<button id="start-button">Start the downloading!</button>
+
+<p class="explanation">
+  Chunks of the download will appear below as they are received.
+</p>
+
+<ul id="chunks">
+</ul>
+
+<p id="completion-message"></p>
+
+<script src="../basicrequest.js"></script>
+<script>
+
+var requestMaker = createRequestMaker();
+var requestStarted = false;
+var chunkList = document.querySelector('#chunks');
+var completionMessage = document.querySelector('#completion-message');
+
+function testRequest(testDone) {
+  if (requestStarted) {
+    return;
+  }
+
+  requestStarted = true;
+  var chunksReceived = 0;
+
+  var requestHandle = requestMaker.makeRequest({
+    url: 'pg135.txt',
+    method: 'GET',
+    mimeType: 'text/plain',
+    onData: function onData(data) {
+      var chunkItem = document.createElement('li');
+      chunkItem.textContent = data;
+      chunkList.appendChild(chunkItem);
+      chunksReceived += 1;
+    },
+    done: function onDone(error, text) {
+      if (error) {
+        completionMessage.textContent = error;
+      }
+      else {
+        completionMessage.textContent = 'Request completed! ' + chunksReceived + 
+          ' chunks received; ' + text.length + ' characters received.';
+      }
+      requestStarted = false;
+    }
+  });
+}
+
+document.querySelector('#start-button').addEventListener('click', testRequest);
+
+  // TODO: Test cancel.
+  // TODO: Test error.
+
+</script>
+
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49491163-1', 'jimkang.com');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
