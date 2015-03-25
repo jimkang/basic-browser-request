@@ -73,7 +73,6 @@ function createRequestMaker() {
 }
 
 if (typeof module === 'object' && typeof module.exports === 'object') {
-  module.exports = {
-    create: createRequestMaker
-  };
+  var requestMaker = createRequestMaker();
+  module.exports = requestMaker.makeRequest;
 }
