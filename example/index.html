@@ -60,17 +60,17 @@ function testRequest(testDone) {
       chunkItem.textContent = data;
       chunkList.appendChild(chunkItem);
       chunksReceived += 1;
-    },
-    done: function onDone(error, text) {
-      if (error) {
-        completionMessage.textContent = error;
-      }
-      else {
-        completionMessage.textContent = 'Request completed! ' + chunksReceived + 
-          ' chunks received; ' + text.length + ' characters received.';
-      }
-      requestStarted = false;
     }
+  },
+  function onDone(error, text) {
+    if (error) {
+      completionMessage.textContent = error;
+    }
+    else {
+      completionMessage.textContent = 'Request completed! ' + chunksReceived + 
+        ' chunks received; ' + text.length + ' characters received.';
+    }
+    requestStarted = false;
   });
 }
 

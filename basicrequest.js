@@ -1,5 +1,5 @@
 function createRequestMaker() {
-  function makeRequest(opts) {
+  function makeRequest(opts, done) {
     opts = defaults(opts, {mimeType: 'application/json'});
 
     var xhr = new XMLHttpRequest();
@@ -22,10 +22,10 @@ function createRequestMaker() {
         if (opts.mimeType === 'application/json') {
           resultObject = JSON.parse(resultObject);
         }
-        opts.done(null, resultObject);
+        done(null, resultObject);
       }
       else {
-        opts.done('Error while making request. XHR status: ' + this.status, null);
+        done(new Error('Error while making request. XHR status: ' + this.status));
       }
     };
 
@@ -46,7 +46,7 @@ function createRequestMaker() {
     function cancelRequest() {
       xhr.abort();
       clearTimeout(timeoutKey);
-      opts.done('Timed out', null);
+      done(new Error('Timed out'));
     }
 
     return {
