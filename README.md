@@ -11,23 +11,27 @@ Installation
 Usage
 -----
 
-    var requestHandle = requestMaker.makeRequest({
-      url: 'http://something.whatever/yeah',
-      method: 'GET',
-      mimeType: 'text/plain',
-      onData: function onData(data) {
-        console.log(data);
-        chunksReceived += 1;
+    var requestHandle = requestMaker.makeRequest(
+      {
+        url: 'http://something.whatever/yeah',
+        method: 'GET',
+        mimeType: 'text/plain',
+        onData: function onData(data) {
+          console.log(data);
+          chunksReceived += 1;
+        }
       },
-      done: function onDone(error, text) {
-        if (error) {
-          console.log(error);
-        }
-        else {
-          useCompleteDownloadedText(text);
-        }
+      done
+    );
+
+    function done(error, text) {
+      if (error) {
+        console.log(error);
       }
-    });
+      else {
+        useCompleteDownloadedText(text);
+      }
+    }
 
 To cancel:
 
