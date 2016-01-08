@@ -29,15 +29,12 @@ function createRequestMaker() {
       }
     };
 
+    var lastReadIndex = 0;
     if (opts.onData) {
-      var lastReadIndex = 0;
-      xhr.onprogress = function progressReceived() {
-        opts.onData(this.responseText.substr(lastReadIndex));
-        lastReadIndex = this.responseText.length;
-      };   
+      xhr.onreadystatechange = stateChanged;
     }
    
-    xhr.send(opts.method === 'POST' ? opts.body : undefined);
+    xhr.send(opts.method === 'POST' ? (opts.formData || opts.body) : undefined);
 
     if (opts.timeLimit > 0) {
       timeoutKey = setTimeout(cancelRequest, opts.timeLimit);
@@ -47,6 +44,13 @@ function createRequestMaker() {
       xhr.abort();
       clearTimeout(timeoutKey);
       done(new Error('Timed out'));
+    }
+
+    function stateChanged() {
+      if (xhr.readyState === 3) {
+        opts.onData(this.responseText.substr(lastReadIndex));
+        lastReadIndex = this.responseText.length;
+      }
     }
 
     return {
