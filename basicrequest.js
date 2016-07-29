@@ -11,6 +11,12 @@ function createRequestMaker() {
       xhr.setRequestHeader('accept', opts.mimeType);
     }
 
+    if (typeof opts.headers === 'object') {
+      for (var headerName in opts.headers) {
+        xhr.setRequestHeader(headerName, opts.headers[headerName]);
+      }
+    }
+
     var timeoutKey = null;
 
     xhr.onload = function requestDone() {

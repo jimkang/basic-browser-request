@@ -55,6 +55,9 @@ function testRequest(testDone) {
     url: 'pg135.txt',
     method: 'GET',
     mimeType: 'text/plain',
+    headers: {
+      'X-hey': 'whatever'
+    },
     onData: function onData(data) {
       var chunkItem = document.createElement('li');
       chunkItem.textContent = data;
