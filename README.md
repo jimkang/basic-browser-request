@@ -44,7 +44,7 @@ If you don't specify a mimeType, it defaults to `application/json` and `done()` 
 Tests
 -----
 
-TODO.
+Run in Chrome and Firefox with `make test`.
 
 License
 -------

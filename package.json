@@ -4,7 +4,7 @@
   "description": "Yet another XHR abstraction. Supports canceling, JSON, and crude chunking.",
   "main": "basicrequest.js",
   "scripts": {
-    "test": "python -m SimpleHTTPServer # Now, open http://localhost:8000/example/index.html"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,15 @@
     "url": "https://github.com/jimkang/basic-browser-request/issues"
   },
   "homepage": "https://github.com/jimkang/basic-browser-request",
-  "devDependencies": {},
+  "devDependencies": {
+    "assert-no-error": "^1.0.0",
+    "browserify": "^13.1.0",
+    "cors": "^2.7.1",
+    "ecstatic": "^2.0.0",
+    "express": "^4.14.0",
+    "smokestack": "^3.4.1",
+    "tap-closer": "^1.0.0",
+    "tape": "^4.6.0"
+  },
   "dependencies": {}
 }
