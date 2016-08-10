@@ -65,7 +65,7 @@ function testRequest(testDone) {
       chunksReceived += 1;
     }
   },
-  function onDone(error, text) {
+  function onDone(error, response, text) {
     if (error) {
       completionMessage.textContent = error;
     }

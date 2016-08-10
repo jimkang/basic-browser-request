@@ -25,7 +25,7 @@ function chunkTest(t) {
     chunksReceived += 1;
   }
 
-  function checkComplete(error, text) {
+  function checkComplete(error, response, text) {
     assertNoError(t.ok, error, 'No error during request.');
 
     console.log('Request completed! ' + chunksReceived + 

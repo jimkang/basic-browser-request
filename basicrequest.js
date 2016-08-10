@@ -28,10 +28,10 @@ function createRequestMaker() {
         if (opts.mimeType === 'application/json') {
           resultObject = JSON.parse(resultObject);
         }
-        done(null, resultObject);
+        done(null, xhr.response, resultObject);
       }
       else {
-        done(new Error('Error while making request. XHR status: ' + this.status));
+        done(new Error('Error while making request. XHR status: ' + this.status), xhr.response);
       }
     };
 

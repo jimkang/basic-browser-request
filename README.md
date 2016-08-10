@@ -24,7 +24,7 @@ Usage
       done
     );
 
-    function done(error, text) {
+    function done(error, response, text) {
       if (error) {
         console.log(error);
       }
@@ -41,6 +41,12 @@ If you don't specify a mimeType, it defaults to `application/json` and `done()` 
 
 [Here's a working example.](http://jimkang.com/basic-browser-request/example)
 
+In the interest of sort-of compatibility with [request](https://github.com/request/request), the callback will be passed three parameters:
+
+- error: An error object, if there was an error while making the request.
+- response: The [XMLHttpRequest.response](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response). This is not at all the same as a [Node response](https://nodejs.org/api/http.html#http_class_http_serverresponse), though, so proceed with caution.
+- body: This is going to be a string or, if the mimeType was `application/json`, an object.
+
 Tests
 -----
 
@@ -50,3 +56,8 @@ License
 -------
 
 MIT.
+
+TODO
+----
+
+Add JSON test.
