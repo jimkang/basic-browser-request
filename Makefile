@@ -7,12 +7,12 @@ SMOKEFIREFOX = node_modules/.bin/tap-closer | \
 	node_modules/.bin/smokestack -b firefox
 
 run-chrome-test: 
+	$(BROWSERIFYCMD) -d tests/basic-tests.js | $(SMOKECHROME)
 	$(BROWSERIFYCMD) -d tests/chunk-tests.js | $(SMOKECHROME)
-	# $(BROWSERIFYCMD) -d tests/basic-tests.js | $(SMOKECHROME)
 
 run-firefox-test:
+	$(BROWSERIFYCMD) -d tests/basic-tests.js | $(SMOKEFIREFOX)
 	$(BROWSERIFYCMD) -d tests/chunk-tests.js | $(SMOKEFIREFOX)
-	# $(BROWSERIFYCMD) -d tests/basic-tests.js | $(SMOKEFIREFOX)
 
 test-chrome: start-web-server run-chrome-test
 

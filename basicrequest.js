@@ -1,6 +1,7 @@
 function createRequestMaker() {
   function makeRequest(opts, done) {
     opts = defaults(opts, {mimeType: 'application/json'});
+    var jsonMode = (opts.mimeType === 'application/json');
 
     var xhr = new XMLHttpRequest();
     xhr.open(opts.method,  opts.url);
@@ -17,15 +18,18 @@ function createRequestMaker() {
       }
     }
 
+    if (jsonMode && typeof opts.body === 'object') {
+      opts.body = JSON.stringify(opts.body);
+    }
+
     var timeoutKey = null;
 
     xhr.onload = function requestDone() {
       clearTimeout(timeoutKey);
       
-      if (this.status === 200) {
-
+      if (this.status >= 200 || this.status < 300) {
         var resultObject = this.responseText;
-        if (opts.mimeType === 'application/json') {
+        if (jsonMode) {
           resultObject = JSON.parse(resultObject);
         }
         done(null, xhr.response, resultObject);
