@@ -1,6 +1,6 @@
 {
   "name": "basic-browser-request",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Yet another XHR abstraction. Supports canceling, JSON, and crude chunking.",
   "main": "basicrequest.js",
   "scripts": {
