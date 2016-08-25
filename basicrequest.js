@@ -5,7 +5,7 @@ function createRequestMaker() {
 
     var xhr = new XMLHttpRequest();
     xhr.open(opts.method,  opts.url);
-    if (opts.method === 'POST') {
+    if (opts.mimeType) {
       xhr.setRequestHeader('content-type', opts.mimeType);
     }
     else if (opts.method === 'GET') {
@@ -44,7 +44,7 @@ function createRequestMaker() {
       xhr.onreadystatechange = stateChanged;
     }
    
-    xhr.send(opts.method === 'POST' ? (opts.formData || opts.body) : undefined);
+    xhr.send(opts.formData || opts.body);
 
     if (opts.timeLimit > 0) {
       timeoutKey = setTimeout(cancelRequest, opts.timeLimit);
