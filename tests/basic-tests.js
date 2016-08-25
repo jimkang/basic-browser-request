@@ -26,6 +26,14 @@ var testCases = [
         putTest: 'yes'
       }
     }
+  },
+  {
+    name: 'GET test',
+    opts: {
+      url: 'http://localhost:8000/get-test',
+      method: 'GET',
+      json: true
+    }
   }
 ];
 

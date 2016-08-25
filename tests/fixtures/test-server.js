@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 app.post('/post-test', respondToPostOrPut);
 app.put('/put-test', respondToPostOrPut);
+app.get('/get-test', respondToGet);
 
 var server = http.createServer(app);
 server.listen(8000);
@@ -24,6 +25,16 @@ function respondToPostOrPut(req, res) {
     res.status(201).json({test: 'ok'})
   }
   else {
-    res.end(500);
+    res.status(500).end();
+  }
+}
+
+
+function respondToGet(req, res) {
+  if (req.headers['accept'] === 'application/json') {
+    res.status(200).json({test: 'ok'})
+  }
+  else {
+    res.status(500).end();
   }
 }

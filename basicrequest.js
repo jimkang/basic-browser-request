@@ -1,15 +1,15 @@
 function createRequestMaker() {
   function makeRequest(opts, done) {
     opts = defaults(opts, {mimeType: 'application/json'});
-    var jsonMode = (opts.mimeType === 'application/json');
+    var jsonMode = (opts.json || opts.mimeType === 'application/json');
 
     var xhr = new XMLHttpRequest();
     xhr.open(opts.method,  opts.url);
     if (opts.mimeType) {
       xhr.setRequestHeader('content-type', opts.mimeType);
     }
-    else if (opts.method === 'GET') {
-      xhr.setRequestHeader('accept', opts.mimeType);
+    if (jsonMode) {
+      xhr.setRequestHeader('accept', 'application/json');
     }
 
     if (typeof opts.headers === 'object') {
