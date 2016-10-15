@@ -1,6 +1,5 @@
 function createRequestMaker() {
   function makeRequest(opts, done) {
-    opts = defaults(opts, {mimeType: 'application/json'});
     var jsonMode = (opts.json || opts.mimeType === 'application/json');
 
     var xhr = new XMLHttpRequest();
@@ -68,18 +67,6 @@ function createRequestMaker() {
       cancelRequest: cancelRequest
     };
   }
-
-  // From Underscore, more or less.
-  function defaults(obj, source) {
-    if (source) {
-      for (var prop in source) {
-        if (obj[prop] === undefined) {
-          obj[prop] = source[prop];
-        }
-      }
-    }
-    return obj;
-  }  
 
   return {
     makeRequest: makeRequest

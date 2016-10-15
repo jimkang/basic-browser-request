@@ -29,3 +29,6 @@ kill-web-server:
 
 pushall:
 	git push origin master && npm publish
+
+lint:
+	./node_modules/.bin/eslint .

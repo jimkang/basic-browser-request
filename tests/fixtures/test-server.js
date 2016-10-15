@@ -1,3 +1,5 @@
+/* global __dirname process */
+
 var express = require('express');
 var http = require('http');
 var ecstatic = require('ecstatic');
@@ -22,7 +24,7 @@ console.log(process.pid);
 
 function respondToPostOrPut(req, res) {
   if (req.body.postTest || req.body.putTest) {
-    res.status(201).json({test: 'ok'})
+    res.status(201).json({test: 'ok'});
   }
   else {
     res.status(500).end();
@@ -32,7 +34,7 @@ function respondToPostOrPut(req, res) {
 
 function respondToGet(req, res) {
   if (req.headers['accept'] === 'application/json') {
-    res.status(200).json({test: 'ok'})
+    res.status(200).json({test: 'ok'});
   }
   else {
     res.status(500).end();
