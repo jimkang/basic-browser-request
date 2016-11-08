@@ -1,4 +1,6 @@
 function createRequestMaker() {
+  // WARNING: onData does NOT work with binary data right now!
+
   function makeRequest(opts, done) {
     var jsonMode = (opts.json || opts.mimeType === 'application/json');
 
@@ -17,6 +19,10 @@ function createRequestMaker() {
       }
     }
 
+    if (opts.binary) {
+      xhr.responseType = 'arraybuffer';
+    }
+
     if (jsonMode && typeof opts.body === 'object') {
       opts.body = JSON.stringify(opts.body);
     }
@@ -27,11 +33,16 @@ function createRequestMaker() {
       clearTimeout(timeoutKey);
       
       if (this.status >= 200 || this.status < 300) {
-        var resultObject = this.responseText;
-        if (jsonMode) {
-          resultObject = JSON.parse(resultObject);
+        if (opts.binary) {
+          done(null, xhr.response);
         }
-        done(null, xhr.response, resultObject);
+        else {
+          var resultObject = this.responseText;
+          if (jsonMode) {
+            resultObject = JSON.parse(resultObject);
+          }
+          done(null, xhr.response, resultObject);
+        }
       }
       else {
         done(new Error('Error while making request. XHR status: ' + this.status), xhr.response);
