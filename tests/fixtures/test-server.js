@@ -24,7 +24,7 @@ console.log(process.pid);
 
 function respondToPostOrPut(req, res) {
   if (req.body.postTest || req.body.putTest) {
-    res.status(201).json({test: 'ok'});
+    res.sendStatus(201).json({test: 'ok'});
   }
   else {
     res.status(500).end();

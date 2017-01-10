@@ -41,7 +41,12 @@ function createRequestMaker() {
           if (jsonMode) {
             resultObject = JSON.parse(resultObject);
           }
-          done(null, xhr.response, resultObject);
+          var responseObject = {
+            statusCode: xhr.status,
+            statusMessage: xhr.statusText,
+            rawResponse: xhr.response
+          };
+          done(null, responseObject, resultObject);
         }
       }
       else {

@@ -14,7 +14,9 @@ var testCases = [
       body: {
         postTest: 'yes'
       }
-    }
+    },
+    expectedStatusCode: 201,
+    expectedStatusMessage: 'Created'
   },
   {
     name: 'PUT test',
@@ -25,7 +27,9 @@ var testCases = [
       body: {
         putTest: 'yes'
       }
-    }
+    },
+    expectedStatusCode: 201,
+    expectedStatusMessage: 'Created'
   },
   {
     name: 'GET test',
@@ -33,7 +37,9 @@ var testCases = [
       url: 'http://localhost:8000/get-test',
       method: 'GET',
       json: true
-    }
+    },
+    expectedStatusCode: 200,
+    expectedStatusMessage: 'OK'
   }
 ];
 
@@ -48,6 +54,17 @@ function runTest(testCase) {
     function checkComplete(error, response, body) {
       assertNoError(t.ok, error, 'No error during request.');
       t.equal(body.test, 'ok', 'Received json body with test: ok.');
+      t.equal(
+        response.statusCode,
+        testCase.expectedStatusCode,
+        'Response has the correct status code.'
+      );
+      t.equal(
+        response.statusMessage,
+        testCase.expectedStatusMessage,
+        'Response has the correct status message.'
+      );
+      t.ok(response.rawResponse, 'Response includes the raw xhr response.');
       t.end();
     }
   }
