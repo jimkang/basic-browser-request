@@ -33,19 +33,20 @@ function createRequestMaker() {
       clearTimeout(timeoutKey);
       
       if (this.status >= 200 || this.status < 300) {
+        var responseObject = {
+          statusCode: this.status,
+          statusMessage: xhr.statusText,
+          rawResponse: xhr.response
+        };
+
         if (opts.binary) {
-          done(null, xhr.response);
+          done(null, responseObject, xhr.response);
         }
         else {
           var resultObject = this.responseText;
           if (jsonMode) {
             resultObject = JSON.parse(resultObject);
           }
-          var responseObject = {
-            statusCode: xhr.status,
-            statusMessage: xhr.statusText,
-            rawResponse: xhr.response
-          };
           done(null, responseObject, resultObject);
         }
       }
