@@ -69,7 +69,7 @@ function createRequestMaker() {
     function cancelRequest() {
       xhr.abort();
       clearTimeout(timeoutKey);
-      done(new Error('Timed out'));
+      done();
     }
 
     function stateChanged() {
