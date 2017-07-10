@@ -36,7 +36,9 @@ function createRequestMaker() {
         var responseObject = {
           statusCode: this.status,
           statusMessage: xhr.statusText,
-          rawResponse: xhr.response
+          responseURL: xhr.responseURL,
+          rawResponse: xhr.response,
+          xhr: xhr
         };
 
         if (opts.binary) {

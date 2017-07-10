@@ -65,6 +65,7 @@ function runTest(testCase) {
         'Response has the correct status message.'
       );
       t.ok(response.rawResponse, 'Response includes the raw xhr response.');
+      t.equal(typeof response.xhr, 'object', 'Response includes the xhr object.');
       t.end();
     }
   }
