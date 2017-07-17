@@ -61,6 +61,7 @@ function createRequestMaker() {
     if (opts.onData) {
       xhr.onreadystatechange = stateChanged;
     }
+    xhr.onerror = handleError;
    
     xhr.send(opts.formData || opts.body);
 
@@ -79,6 +80,13 @@ function createRequestMaker() {
         opts.onData(this.responseText.substr(lastReadIndex));
         lastReadIndex = this.responseText.length;
       }
+    }
+
+    // handleError is passed a progressEvent, but it has no useful information.
+    function handleError() {
+      var error = new Error('There is a problem with the network.');
+      error.name = 'XHR network error';
+      done(error);
     }
 
     return {
