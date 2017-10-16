@@ -32,7 +32,7 @@ function createRequestMaker() {
     xhr.onload = function requestDone() {
       clearTimeout(timeoutKey);
       
-      if (this.status >= 200 || this.status < 300) {
+      if (this.status >= 200 && this.status < 300) {
         var responseObject = {
           statusCode: this.status,
           statusMessage: xhr.statusText,
