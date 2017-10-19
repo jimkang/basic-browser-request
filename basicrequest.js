@@ -31,16 +31,16 @@ function createRequestMaker() {
 
     xhr.onload = function requestDone() {
       clearTimeout(timeoutKey);
-      
-      if (this.status >= 200 && this.status < 300) {
-        var responseObject = {
-          statusCode: this.status,
-          statusMessage: xhr.statusText,
-          responseURL: xhr.responseURL,
-          rawResponse: xhr.response,
-          xhr: xhr
-        };
 
+      var responseObject = {
+        statusCode: this.status,
+        statusMessage: xhr.statusText,
+        responseURL: xhr.responseURL,
+        rawResponse: xhr.response,
+        xhr: xhr
+      };
+
+      if (this.status >= 200 && this.status < 300) {
         if (opts.binary) {
           done(null, responseObject, xhr.response);
         }
@@ -53,7 +53,7 @@ function createRequestMaker() {
         }
       }
       else {
-        done(new Error('Error while making request. XHR status: ' + this.status), xhr.response);
+        done(new Error('Error while making request. XHR status: ' + this.status), responseObject);
       }
     };
 
