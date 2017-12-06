@@ -40,21 +40,21 @@ function createRequestMaker() {
         xhr: xhr
       };
 
-      if (this.status >= 200 && this.status < 300) {
-        if (opts.binary) {
-          done(null, responseObject, xhr.response);
-        }
-        else {
-          var resultObject = this.responseText;
-          if (jsonMode) {
-            resultObject = JSON.parse(resultObject);
-          }
-          done(null, responseObject, resultObject);
-        }
+      if (opts.binary) {
+        done(null, responseObject, xhr.response);
       }
       else {
-        done(new Error('Error while making request. XHR status: ' + this.status), responseObject);
-      }
+        var resultObject = this.responseText;
+        if (jsonMode) {
+          try {
+            resultObject = JSON.parse(resultObject);
+          }
+          catch (e) {
+            responseObject.jsonParseError = e;
+          }
+        }
+        done(null, responseObject, resultObject);
+      }      
     };
 
     var lastReadIndex = 0;
