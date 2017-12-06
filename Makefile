@@ -28,7 +28,7 @@ kill-web-server:
 	rm -f tests/fixtures/server-pid.txt
 
 pushall:
-	git push origin master && npm publish
+	git push origin gh-pages && npm publish
 
 lint:
 	./node_modules/.bin/eslint .
