@@ -5,7 +5,7 @@ var http = require('http');
 var ecstatic = require('ecstatic');
 var cors = require('cors');
 var bodyParser = require('body-parser');
- 
+
 var app = express();
 app.use(cors());
 app.use(ecstatic({ root: __dirname + '/../../' }));
@@ -24,19 +24,16 @@ console.log(process.pid);
 
 function respondToPostOrPut(req, res) {
   if (req.body.postTest || req.body.putTest) {
-    res.status(201).json({test: 'ok'});
-  }
-  else {
+    res.status(201).json({ test: 'ok' });
+  } else {
     res.status(500).end();
   }
 }
 
-
 function respondToGet(req, res) {
   if (req.headers['accept'] === 'application/json') {
-    res.status(200).json({test: 'ok'});
-  }
-  else {
+    res.status(200).json({ test: 'ok' });
+  } else {
     res.status(500).end();
   }
 }

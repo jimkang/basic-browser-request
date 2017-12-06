@@ -2,10 +2,10 @@ function createRequestMaker() {
   // WARNING: onData does NOT work with binary data right now!
 
   function makeRequest(opts, done) {
-    var jsonMode = (opts.json || opts.mimeType === 'application/json');
+    var jsonMode = opts.json || opts.mimeType === 'application/json';
 
     var xhr = new XMLHttpRequest();
-    xhr.open(opts.method,  opts.url);
+    xhr.open(opts.method, opts.url);
     if (opts.mimeType) {
       xhr.setRequestHeader('content-type', opts.mimeType);
     }
@@ -42,19 +42,17 @@ function createRequestMaker() {
 
       if (opts.binary) {
         done(null, responseObject, xhr.response);
-      }
-      else {
+      } else {
         var resultObject = this.responseText;
         if (jsonMode) {
           try {
             resultObject = JSON.parse(resultObject);
-          }
-          catch (e) {
+          } catch (e) {
             responseObject.jsonParseError = e;
           }
         }
         done(null, responseObject, resultObject);
-      }      
+      }
     };
 
     var lastReadIndex = 0;
@@ -62,7 +60,7 @@ function createRequestMaker() {
       xhr.onreadystatechange = stateChanged;
     }
     xhr.onerror = handleError;
-   
+
     xhr.send(opts.formData || opts.body);
 
     if (opts.timeLimit > 0) {

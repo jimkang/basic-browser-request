@@ -2,7 +2,9 @@ var test = require('tape');
 var makeRequest = require('../basicrequest');
 var assertNoError = require('assert-no-error');
 
-console.log('An http server needs to be started at localhost:8000 for this test.');
+console.log(
+  'An http server needs to be started at localhost:8000 for this test.'
+);
 
 test('Get chunks', chunkTest);
 
@@ -28,8 +30,13 @@ function chunkTest(t) {
   function checkComplete(error, response, text) {
     assertNoError(t.ok, error, 'No error during request.');
 
-    console.log('Request completed! ' + chunksReceived + 
-        ' chunks received; ' + text.length + ' characters received.');
+    console.log(
+      'Request completed! ' +
+        chunksReceived +
+        ' chunks received; ' +
+        text.length +
+        ' characters received.'
+    );
     t.end();
   }
 }

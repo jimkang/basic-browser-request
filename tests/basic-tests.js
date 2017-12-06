@@ -2,7 +2,9 @@ var test = require('tape');
 var makeRequest = require('../basicrequest');
 var assertNoError = require('assert-no-error');
 
-console.log('An http server needs to be started at localhost:8000 for this test.');
+console.log(
+  'An http server needs to be started at localhost:8000 for this test.'
+);
 
 var testCases = [
   {
@@ -65,7 +67,11 @@ function runTest(testCase) {
         'Response has the correct status message.'
       );
       t.ok(response.rawResponse, 'Response includes the raw xhr response.');
-      t.equal(typeof response.xhr, 'object', 'Response includes the xhr object.');
+      t.equal(
+        typeof response.xhr,
+        'object',
+        'Response includes the xhr object.'
+      );
       t.end();
     }
   }
