@@ -32,6 +32,11 @@ function createRequestMaker() {
     xhr.onload = function requestDone() {
       clearTimeout(timeoutKey);
 
+      if (opts.onData) {
+        // Send out that last bit.
+        emitNextChunk();
+      }
+
       var responseObject = {
         statusCode: this.status,
         statusMessage: xhr.statusText,
@@ -75,11 +80,17 @@ function createRequestMaker() {
 
     function stateChanged() {
       if (xhr.readyState === 3) {
-        opts.onData(this.responseText.substr(lastReadIndex));
-        lastReadIndex = this.responseText.length;
+        emitNextChunk();
       }
     }
 
+    function emitNextChunk() {
+      if (xhr.responseText) {
+        opts.onData(xhr.responseText.substr(lastReadIndex));
+        lastReadIndex = xhr.responseText.length;
+      }
+    }
+ 
     // handleError is passed a progressEvent, but it has no useful information.
     function handleError() {
       var error = new Error('There is a problem with the network.');
