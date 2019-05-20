@@ -90,7 +90,7 @@ function createRequestMaker() {
         lastReadIndex = xhr.responseText.length;
       }
     }
- 
+
     // handleError is passed a progressEvent, but it has no useful information.
     function handleError() {
       var error = new Error('There is a problem with the network.');
