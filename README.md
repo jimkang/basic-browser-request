@@ -11,7 +11,9 @@ Installation
 Usage
 -----
 
-    var requestHandle = requestMaker.makeRequest(
+    var request = require('basic-browser-request');
+
+    var requestHandle = request(
       {
         url: 'http://something.whatever/yeah',
         method: 'GET',
