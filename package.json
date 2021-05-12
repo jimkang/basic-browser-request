@@ -27,8 +27,8 @@
   "homepage": "https://github.com/jimkang/basic-browser-request",
   "devDependencies": {
     "assert-no-error": "^1.0.0",
-    "body-parser": "^1.15.2",
-    "browserify": "^16.2.3",
+    "body-parser": "^1.19.0",
+    "browserify": "^16.5.2",
     "cors": "^2.7.1",
     "ecstatic": "^4.1.2",
     "express": "^4.16.3",
