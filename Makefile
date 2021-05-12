@@ -1,12 +1,12 @@
 BROWSERIFYCMD = node_modules/.bin/browserify
 
 SMOKECHROME = node_modules/.bin/tap-closer | \
-	node_modules/.bin/smokestack -b chrome
+	node ../smokestack/bin/smokestack -b chrome
 
 SMOKEFIREFOX = node_modules/.bin/tap-closer | \
-	node_modules/.bin/smokestack -b firefox
+	node ../smokestack/bin/smokestack -b firefox
 
-run-chrome-test: 
+run-chrome-test:
 	$(BROWSERIFYCMD) -d tests/basic-tests.js | $(SMOKECHROME)
 	$(BROWSERIFYCMD) -d tests/chunk-tests.js | $(SMOKECHROME)
 

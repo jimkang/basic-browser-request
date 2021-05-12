@@ -30,9 +30,9 @@
     "body-parser": "^1.19.0",
     "browserify": "^16.5.2",
     "cors": "^2.7.1",
-    "ecstatic": "^4.1.2",
+    "ecstatic": "^4.1.4",
     "express": "^4.16.3",
-    "smokestack": "^3.6.0",
+    "smokestack": "jimkang/smokestack",
     "tap-closer": "^1.0.0",
     "tape": "^4.9.1"
   },
