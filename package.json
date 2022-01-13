@@ -28,13 +28,12 @@
   "devDependencies": {
     "assert-no-error": "^1.0.0",
     "body-parser": "^1.19.0",
-    "browserify": "^16.5.2",
+    "browserify": "^17.0.0",
     "cors": "^2.7.1",
     "ecstatic": "^4.1.4",
     "express": "^4.16.3",
-    "smokestack": "jimkang/smokestack",
     "tap-closer": "^1.0.0",
-    "tape": "^4.9.1"
+    "tape": "^5.4.0"
   },
   "dependencies": {}
 }
